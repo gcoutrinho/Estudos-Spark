@@ -1,0 +1,19 @@
+Qual o objetivo do comando cash em spark?
+-Esse comando é usado para carregar os dados em memória para que os mesmos possam ser acessados de uma forma mais rápida. Essa funcionalidade é muito útil em dados que são consultados muitas vezes seguidas, pois dessa forma o dado será carregado apenas uma vez do disco para a memória e nas demais vezes poderão ser consultados diretamente em memória.
+O mesmo código implementado em Spark é normalmente mais rápido que a implementação equivalente em MapReduce. Por quê?
+-O Spark é geralmente muito mais rápido que o MapReduce devido à forma como processa os dados. Enquanto o MapReduce opera em etapas, o Spark opera a partir de todo o conjunto de dados de uma só vez.
+Qual é a função do SparkContext?
+-O context é um objeto que tem a função de conectar o spark ao sistema que está sendo desenvolvido.
+Explique com suas palavras o que é Resilient Distributed Datasets(RDD).
+-É uma estrutura que é distribuída por vários nodos do clustes e que permite o armazenamento de dados particionados somente leitura.
+GroupByKey é menos eficiente que reduceByKey em grandes dataset. Por quê?
+-o GroupByKey é menos eficiente, pois o mesmo transfere todo o DataSet pela rede, enquanto o ReduceByKey calcula somente locais para cada chave em cada partição e combina essas somas locais em somas maiores.
+
+Explique o que o código Scala abaixo faz.
+val textFile = sc.textFile("hdfs://...")
+val counts = textFile.flatMap(line => line.split(""))
+	.map(word => (word, 1))
+	.reduceByKey(_ + _)
+counts.saveAsTextFile("hdfs://...")
+
+-No início do código é carregado o conteúdo de um arquivo txt do hadoop e em seguida é feito a contagem do número de palavras que estão dentro esse arquivo e por último o resultado é salvo em um outro arquivo de texto pelo comando saveAsTextFile();
